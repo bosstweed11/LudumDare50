@@ -31,11 +31,31 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        Walk();
+    }
+
+    void Walk()
+    {
         _rigidbody2D.velocity = new Vector2
         {
             x = moveInput.x * playerSpeed,
             y = _rigidbody2D.velocity.y
         };
+
+        if (IsMoving())
+            SetSpriteDirection();
+    }
+
+    void SetSpriteDirection()
+    {
+        var localScale = transform.localScale;
+        localScale = new Vector2
+        {
+            x = Mathf.Sign(_rigidbody2D.velocity.x),
+            y = localScale.y
+        };
+        transform.localScale = localScale;
     }
 
     void OnMove(InputValue value)
@@ -74,5 +94,10 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(label);
         Debug.Log("x : " + vector.x);
         Debug.Log("y : " + vector.y);
+    }
+    
+    bool IsMoving()
+    {
+        return Mathf.Abs(_rigidbody2D.velocity.x) > Mathf.Epsilon;
     }
 }

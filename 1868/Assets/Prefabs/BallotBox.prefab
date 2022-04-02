@@ -206,8 +206,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -650871469
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -279,8 +279,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 636e7ddd7fd754d6ea58830a1a73b3da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  label: 
   democraticVoteUI: {fileID: 5334367286667230907}
   republicanVoteUI: {fileID: 5334367285969394443}
+  democraticVoteCount: 0
+  republicanVoteCount: 0
 --- !u!1 &5334367286667230885
 GameObject:
   m_ObjectHideFlags: 0

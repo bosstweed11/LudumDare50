@@ -44,3 +44,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BallotBox
+    uniqueID: 3644095827
+    locked: 0
+  - name: Potato
+    uniqueID: 349103461
+    locked: 0
+  - name: Player
+    uniqueID: 3799608561
+    locked: 0
