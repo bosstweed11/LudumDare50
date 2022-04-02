@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BallotBox
   - Potato
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - Water
   - UI
   - Potato
-  - 
-  - 
+  - Ground
+  - BallotBox
   - 
   - 
   - 

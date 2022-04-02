@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5334367285969394442}
   - component: {fileID: 5334367285969394440}
   - component: {fileID: 5334367285969394443}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: RepublicanVotesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,9 +147,9 @@ GameObject:
   - component: {fileID: 5334367286456500343}
   - component: {fileID: 5334367286456500342}
   - component: {fileID: 5334367286456500341}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BallotBox
-  m_TagString: Untagged
+  m_TagString: BallotBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,10 +230,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.019496977, y: 0.25098896}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -244,7 +244,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4270836, y: 0.49802208}
   m_EdgeRadius: 0
 --- !u!50 &5334367286456500342
 Rigidbody2D:
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 5334367286667230906}
   - component: {fileID: 5334367286667230904}
   - component: {fileID: 5334367286667230907}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: DemocraticVotesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 5334367287041717621}
   - component: {fileID: 5334367287041717620}
   - component: {fileID: 5334367287041717623}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

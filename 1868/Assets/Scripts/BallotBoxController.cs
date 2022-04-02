@@ -26,19 +26,24 @@ public class BallotBoxController : MonoBehaviour
             counter = 0;
         }
     }
-    
-    private void OnTriggerEnter2D(Collider2D col)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        var col = collision.gameObject;
         if (col.tag.Equals("Potato"))
         {
-            Destroy(col.gameObject);
-            
-            UpdateDemocratText();
+            var potato = col.gameObject.GetComponent<PotatoMovement>();
+            if (potato._potatoState.Equals(PotatoState.InAir))
+            {
+                UpdateDemocratText();
+                potato.Return();
+            }
         }
     }
 
     private void UpdateRepublicanText()
     {
+        //Debug.Log("Voted Republican!");
         republicanVoteCount++;
         republicanVoteUI.text = republicanVoteCount.ToString();
         _gameManager.UpdateRepublicanText();
@@ -46,6 +51,7 @@ public class BallotBoxController : MonoBehaviour
     
     private void UpdateDemocratText()
     {
+        Debug.Log("Voted Democrat!");
         democraticVoteCount++;
         democraticVoteUI.text = democraticVoteCount.ToString();
         _gameManager.UpdateDemocratText();
