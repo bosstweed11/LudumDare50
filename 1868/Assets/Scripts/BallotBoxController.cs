@@ -9,9 +9,10 @@ public class BallotBoxController : MonoBehaviour
     private int democraticVoteCount = 0;
     private int republicanVoteCount = 0;
     private float counter = 0;
+    private GameManager _gameManager;
     void Start()
     {
-        
+        _gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -31,18 +32,22 @@ public class BallotBoxController : MonoBehaviour
         if (col.tag.Equals("Potato"))
         {
             Destroy(col.gameObject);
-            democraticVoteCount++;
+            
             UpdateDemocratText();
         }
     }
 
     private void UpdateRepublicanText()
     {
+        republicanVoteCount++;
         republicanVoteUI.text = republicanVoteCount.ToString();
+        _gameManager.UpdateRepublicanText();
     }
     
     private void UpdateDemocratText()
     {
+        democraticVoteCount++;
         democraticVoteUI.text = democraticVoteCount.ToString();
+        _gameManager.UpdateDemocratText();
     }
 }
