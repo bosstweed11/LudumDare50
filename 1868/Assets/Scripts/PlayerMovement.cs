@@ -1,5 +1,3 @@
-using System;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Debug = UnityEngine.Debug;
@@ -37,13 +35,9 @@ public class PlayerMovement : MonoBehaviour
 
     void OnFire()
     {
-        PrintVector(Mouse.current.position.ReadValue(), "original mouse position");
-        Vector3 pos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        PrintVector(pos, "mouse position");
-        Vector3 trans = Camera.main.ScreenToWorldPoint(transform.position);
-        var throwVector = pos - transform.position;
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        var throwVector = mousePosition - transform.position;
         var thisPotato= Instantiate(tater, transform.position, transform.rotation);
-        PrintVector(throwVector, "throw vector");
         thisPotato.GetComponent<Rigidbody2D>().velocity = new Vector2
         {
             x = throwVector.x * throwSpeed,
