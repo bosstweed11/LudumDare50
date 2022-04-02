@@ -7,7 +7,7 @@ public class PotatoMovement : MonoBehaviour
     public GameManager _gameManager;
     private Transform _player;
 
-    private float returnSpeed = 0.01f;
+    private float returnSpeed = 0.02f;
     private float followSpeed = 0.05f;
     // Start is called before the first frame update
     void Start()
@@ -44,10 +44,12 @@ public class PotatoMovement : MonoBehaviour
 
     public void UpdateReturn()
     {
-        transform.position = Vector2.Lerp(transform.position, _player.position, returnSpeed);
+        var distance = Vector2.Distance(transform.position, _player.position);
+        var direction = (_player.position - transform.position).normalized;
+
+        transform.position += direction * returnSpeed;
         if (_potatoState.Equals(PotatoState.Returning))
         {
-            var distance = Vector2.Distance(transform.position, _player.position);
             if (distance < 1f)
             {
                 _potatoState = PotatoState.InHand;

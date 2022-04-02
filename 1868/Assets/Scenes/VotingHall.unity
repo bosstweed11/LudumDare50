@@ -266,7 +266,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5334367286456500336, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_Name
-      value: BallotBox (1)
+      value: Mayor Ballot Box
       objectReference: {fileID: 0}
     - target: {fileID: 5334367286456500337, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_RootOrder
@@ -311,6 +311,14 @@ PrefabInstance:
     - target: {fileID: 5334367286456500337, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334367286456500341, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
+      propertyPath: name
+      value: Mayor
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334367286456500341, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
+      propertyPath: label
+      value: Mayor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
@@ -622,7 +630,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5334367286456500336, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_Name
-      value: BallotBox (3)
+      value: City Chamberlain BallotBox
       objectReference: {fileID: 0}
     - target: {fileID: 5334367286456500337, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_RootOrder
@@ -667,6 +675,14 @@ PrefabInstance:
     - target: {fileID: 5334367286456500337, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334367286456500341, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
+      propertyPath: name
+      value: Chamberlain
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334367286456500341, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
+      propertyPath: label
+      value: City
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
@@ -1072,7 +1088,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5334367286456500336, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_Name
-      value: BallotBox (2)
+      value: Public Works Ballot Box
       objectReference: {fileID: 0}
     - target: {fileID: 5334367286456500337, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_RootOrder
@@ -1117,6 +1133,14 @@ PrefabInstance:
     - target: {fileID: 5334367286456500337, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334367286456500341, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
+      propertyPath: name
+      value: Works
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334367286456500341, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
+      propertyPath: label
+      value: Works
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
@@ -1785,7 +1809,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5334367286456500336, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_Name
-      value: BallotBox
+      value: Comptroller Ballot Box
       objectReference: {fileID: 0}
     - target: {fileID: 5334367286456500336, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_TagString
@@ -1834,6 +1858,14 @@ PrefabInstance:
     - target: {fileID: 5334367286456500337, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334367286456500341, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
+      propertyPath: name
+      value: Comptroller
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334367286456500341, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
+      propertyPath: label
+      value: Comptroller
       objectReference: {fileID: 0}
     - target: {fileID: 5334367286456500342, guid: 364c8d8bb24764fa284b60d0027fdfa0, type: 3}
       propertyPath: m_Simulated

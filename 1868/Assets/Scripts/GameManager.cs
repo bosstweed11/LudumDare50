@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager: MonoBehaviour
 {
@@ -65,6 +66,19 @@ public class GameManager: MonoBehaviour
         UpdatePotatoesVotingText();
         potatoesAtHome++;
         UpdatePotatoesAtHomeText();
+
+        if (potatoesVoting == 0 && potatoesInHand == 0)
+        {
+            Debug.Log("Game Over");
+            var ballotBoxes = GameObject.FindObjectsOfType<BallotBoxController>();
+            foreach (var ballotBox in ballotBoxes)
+            {
+                PlayerPrefs.SetInt(ballotBox.label + "Democrat", ballotBox.democraticVoteCount);
+                PlayerPrefs.SetInt(ballotBox.label + "Republican", ballotBox.republicanVoteCount);
+            }
+
+            SceneManager.LoadScene("Ending");
+        }
     }
 
     public void PotatoInHand()

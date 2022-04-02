@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class BallotBoxController : MonoBehaviour
 {
+    [SerializeField] public string label;
     [SerializeField] private TextMeshProUGUI democraticVoteUI;
     [SerializeField] private TextMeshProUGUI republicanVoteUI;
     // Start is called before the first frame update
-    private int democraticVoteCount = 0;
-    private int republicanVoteCount = 0;
+    public int democraticVoteCount = 0;
+    public int republicanVoteCount = 0;
     private float counter = 0;
     private GameManager _gameManager;
+    
     void Start()
     {
         _gameManager = GameObject.FindObjectOfType<GameManager>();
