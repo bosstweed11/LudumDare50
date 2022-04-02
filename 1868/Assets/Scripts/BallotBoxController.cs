@@ -48,7 +48,6 @@ public class BallotBoxController : MonoBehaviour
         //Debug.Log("Voted Republican!");
         republicanVoteCount++;
         republicanVoteUI.text = republicanVoteCount.ToString();
-        _gameManager.UpdateRepublicanText();
     }
     
     private void UpdateDemocratText()
@@ -56,6 +55,5 @@ public class BallotBoxController : MonoBehaviour
         Debug.Log("Voted Democrat!");
         democraticVoteCount++;
         democraticVoteUI.text = democraticVoteCount.ToString();
-        _gameManager.UpdateDemocratText();
     }
 }

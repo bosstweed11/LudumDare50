@@ -6,7 +6,6 @@ using Debug = UnityEngine.Debug;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     [SerializeField] private float playerSpeed;
     [SerializeField] private float throwSpeed;
     [SerializeField] private GameObject tater;
@@ -16,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Rigidbody2D _rigidbody2D;
     public GameManager _gameManager;
+    public bool canMove = false;
     
     // Start is called before the first frame update
     void Start()
@@ -31,8 +31,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        Walk();
+        if (canMove)
+            Walk();
     }
 
     void Walk()
@@ -65,21 +65,23 @@ public class PlayerMovement : MonoBehaviour
 
     void OnFire()
     {
-        var getNextPotatoToThrow = GetNextPotato();
-        if (getNextPotatoToThrow != null)
+        if (canMove)
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            var throwVector = mousePosition - transform.position;
-            getNextPotatoToThrow.GetComponent<PotatoMovement>()._potatoState = PotatoState.InAir;
-            getNextPotatoToThrow.GetComponent<Rigidbody2D>().velocity = new Vector2
+            var getNextPotatoToThrow = GetNextPotato();
+            if (getNextPotatoToThrow != null)
             {
-                x = throwVector.x * throwSpeed,
-                y = throwVector.y * throwSpeed
-            };
-            _gameManager.SentPotatoToVote();
-            Debug.Log("Threw potato!");
+                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                var throwVector = mousePosition - transform.position;
+                getNextPotatoToThrow.GetComponent<PotatoMovement>()._potatoState = PotatoState.InAir;
+                getNextPotatoToThrow.GetComponent<Rigidbody2D>().velocity = new Vector2
+                {
+                    x = throwVector.x * throwSpeed,
+                    y = throwVector.y * throwSpeed
+                };
+                _gameManager.SentPotatoToVote();
+                Debug.Log("Threw potato!");
+            }
         }
-        
     }
 
     private PotatoMovement GetNextPotato()

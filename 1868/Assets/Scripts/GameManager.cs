@@ -3,45 +3,70 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager: MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI democraticVoteUI;
-    [SerializeField] private TextMeshProUGUI republicanVoteUI;
     [SerializeField] private TextMeshProUGUI potatoesInHandUI;
     [SerializeField] private TextMeshProUGUI potatoesVotingUI;
     [SerializeField] private TextMeshProUGUI potatoesAtHomeUI;
 
+    [SerializeField] private GameObject chatPanel;
+    [SerializeField] private TextMeshProUGUI chatText;
+
     private int potatoesAtHome = 0;
-
     private int potatoesInHand = 5;
-
     private int potatoesVoting = 0;
+
+    private List<string> introChatMessages = new List<string>
+    {
+        "Hey I'm Boss Greed, leader of Tammany Hall, the leading social group for the Democratic Party in New York City.",
+        "If we can win these 4 seats, we'll have complete control of the city government!",
+        "I need your help, since I'm a character in a game, I need you to control me. Here's my user manual.",
+        "Walk Left - A\nWalk Right - D\nAim Potato - Mouse Cursor\nThrow Potato - Click",
+        "Potatoes? Yeah here we vote with potatoes. Remember it's just a video game, it doesn't have to make sense!",
+        "Be careful with your aim, if you miss the ballot boxes, the potatoes will go home and stop voting, we don't want that!",
+        "If you hit a ballot box, the potatoes will come back for more, they love to vote early and often!",
+        "Make sure to be leading by the end of the day, or each and every one of my bits will be sad.",
+        "Let the voting begin!\n\nPolls are open!",
+    };
+
+    private bool readingIntro = true;
+    private int introTextIndex = 0;
+    
+    
     // Start is called before the first frame update
-    private int democraticVoteCount = 0;
-    private int republicanVoteCount = 0;
     void Start()
     {
-        
+        SetIntroText();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (readingIntro)
+        {
+            if (Keyboard.current.anyKey.wasPressedThisFrame)
+            {
+                introTextIndex++;
+                if (introTextIndex == introChatMessages.Count)
+                {
+                    readingIntro = false;
+                    chatPanel.SetActive(false);
+                    FindObjectOfType<PlayerMovement>().canMove = true;
+                }
+                else
+                {
+                    SetIntroText();
+                }
+            }
+        }
     }
-    
-    public void UpdateRepublicanText()
+
+    void SetIntroText()
     {
-        republicanVoteCount++;
-        republicanVoteUI.text = "Republican: " + republicanVoteCount.ToString();
-    }
-    
-    public void UpdateDemocratText()
-    {
-        democraticVoteCount++;
-        democraticVoteUI.text = "Democrat: " + democraticVoteCount.ToString();
+        chatText.text = introChatMessages[introTextIndex];
     }
     
     public void UpdatePotatoText(PotatoState state, int count)
