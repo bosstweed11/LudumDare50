@@ -137,9 +137,9 @@ GameObject:
   - component: {fileID: 978872584}
   - component: {fileID: 978872583}
   - component: {fileID: 978872588}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BossGreed
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,7 +262,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9528302, g: 0.8844373, b: 0.013483422, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -299,6 +299,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 8
+  throwSpeed: 3
+  tater: {fileID: 7380860875284785172, guid: 9278cf52ee5ca4bb6abb0caf0b01e776, type: 3}
 --- !u!1 &1645120470
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +536,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.754717, g: 0.6095124, b: 0.09611962, a: 1}
+  m_Color: {r: 0.19182736, g: 0.7529412, b: 0.0980392, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
