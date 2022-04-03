@@ -15,7 +15,8 @@ public class ResultsController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI republicanChamberlainVotesUI;
     [SerializeField] private TextMeshProUGUI democratChamberlainVotesUI;
     [SerializeField] private TextMeshProUGUI resultTextUI;
-    
+    [SerializeField] private GameObject wonImage;
+    [SerializeField] private GameObject lostImage;
     
     private int republicanMayorVotes = 0;
     private int democratMayorVotes = 0;
@@ -79,26 +80,14 @@ public class ResultsController : MonoBehaviour
 
         if (democratCityChamberlainVotes > republicanCityChamberlainVotes)
             democraticRacesWon++;
-
-        if (democraticRacesWon == 0)
+    
+        if (democraticRacesWon == 4)
         {
-            resultTextUI.text = "Oh no! All the elections got away from you this time. Try Again!";
+            wonImage.SetActive(true);
         }
-        else if (democraticRacesWon == 1)
+        else
         {
-            resultTextUI.text = "You won 1 election, Try to win them all next time!";
-        }
-        else if (democraticRacesWon == 2)
-        {
-            resultTextUI.text = "2 out of 4 ain't bad, but it ain't control! Try Again!";
-        }
-        else if (democraticRacesWon == 3)
-        {
-            resultTextUI.text = "So close! You won 3 out of 4! Try to get them all next time!";
-        }
-        else if (democraticRacesWon == 4)
-        {
-            resultTextUI.text = "Congratulations! You control the government! Now be nice!";
+            lostImage.SetActive(true);
         }
     }
 }
