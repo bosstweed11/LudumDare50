@@ -27,11 +27,10 @@ public class NaturalizationController : MonoBehaviour
             {
                 moveSpeed -= 0.005f * Time.deltaTime;
             }
-            Debug.Log("speed: " + moveSpeed);
         }
     }
 
-    public void SpawnKey()
+    public void SpawnKey(int source)
     {
         Instantiate(key, new Vector3(30, 2.5f, 0), transform.rotation);
     }

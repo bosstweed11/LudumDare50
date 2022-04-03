@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PotatoMovement : MonoBehaviour
 {
@@ -7,7 +8,11 @@ public class PotatoMovement : MonoBehaviour
     public GameManager _gameManager;
     private Transform _player;
 
-    private float returnSpeed = 0.02f;
+    [SerializeField] private Sprite sprite1;
+    [SerializeField] private Sprite sprite2;
+    [SerializeField] private Sprite sprite3;
+
+    private float returnSpeed = 0.005f;
     private float followSpeed = 0.05f;
     // Start is called before the first frame update
     void Start()
@@ -15,6 +20,19 @@ public class PotatoMovement : MonoBehaviour
         _potatoState = PotatoState.InHand;
         _player = GameObject.FindObjectOfType<PlayerMovement>().transform;
         _gameManager = GameObject.FindObjectOfType<GameManager>();
+        var random = Random.Range(0, 3);
+        switch (random)
+        {
+            case 0:
+                GetComponent<SpriteRenderer>().sprite = sprite1;
+                break;
+            case 1:
+                GetComponent<SpriteRenderer>().sprite = sprite2;
+                break;
+            case 2:
+                GetComponent<SpriteRenderer>().sprite = sprite3;
+                break;
+        }
     }
 
     // Update is called once per frame

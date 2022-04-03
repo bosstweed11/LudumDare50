@@ -14,6 +14,8 @@ public class BallotBoxController : MonoBehaviour
 
     private bool isOpen = false;
     
+    [SerializeField] private AudioClip potatoToVote;
+    
     void Start()
     {
         _gameManager = GameObject.FindObjectOfType<GameManager>();
@@ -30,7 +32,7 @@ public class BallotBoxController : MonoBehaviour
         if (isOpen)
         {
             counter += Time.deltaTime;
-            if (counter > 1)
+            if (counter > 3)
             {
                 republicanVoteCount++;
                 UpdateRepublicanText();
@@ -55,14 +57,13 @@ public class BallotBoxController : MonoBehaviour
 
     private void UpdateRepublicanText()
     {
-        //Debug.Log("Voted Republican!");
         republicanVoteUI.text = republicanVoteCount.ToString();
     }
     
     private void UpdateDemocratText()
     {
-        Debug.Log("Voted Democrat!");
         democraticVoteCount++;
         democraticVoteUI.text = democraticVoteCount.ToString();
+        AudioSource.PlayClipAtPoint(potatoToVote, Camera.main.transform.position);
     }
 }

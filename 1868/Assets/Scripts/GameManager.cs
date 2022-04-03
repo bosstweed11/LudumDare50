@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameManager: MonoBehaviour
 {
@@ -20,6 +21,14 @@ public class GameManager: MonoBehaviour
     [SerializeField] public Image chatImage;
 
     [SerializeField] public GameObject bossGreed;
+    
+    [SerializeField] private AudioClip potatoWentHome;
+    [SerializeField] private AudioClip potatoInHand;
+    [SerializeField] private AudioClip potatoToVote;
+    [SerializeField] private AudioClip potatoThrown1;
+    [SerializeField] private AudioClip potatoThrown2;
+    [SerializeField] private AudioClip potatoThrown3;
+    [SerializeField] private AudioClip gameOverSound;
     
     private int potatoesAtHome = 0;
     private int potatoesInHand = 5;
@@ -119,7 +128,7 @@ public class GameManager: MonoBehaviour
                 introBarnard = false;
                 hasEnteredCourthouse = true;
                 FindObjectOfType<NaturalizationController>().hasStarted = true;
-                FindObjectOfType<NaturalizationController>().SpawnKey();
+                FindObjectOfType<NaturalizationController>().SpawnKey(4);
             }
             else
             {
@@ -129,13 +138,13 @@ public class GameManager: MonoBehaviour
         else
         {
             gameTimeLeft -= Time.deltaTime;
-            if (gameTimeLeft > 10)
+            if ((int) (gameTimeLeft % 60) < 10)
             {
-                timeLeftUI.text = "Polls Close in: " + (int)(gameTimeLeft / 60) + ":" + (int)(gameTimeLeft % 60);
+                timeLeftUI.text = "Polls Close in: " + (int)(gameTimeLeft / 60) + ":0" + (int)(gameTimeLeft % 60);
             }
             else
             {
-                timeLeftUI.text = "Polls Close in: 0:0" + (int)(gameTimeLeft % 60);
+                timeLeftUI.text = "Polls Close in: " + (int)(gameTimeLeft / 60) + ":" + (int)(gameTimeLeft % 60);
             }
             if (gameTimeLeft < 0)
             {
@@ -165,6 +174,10 @@ public class GameManager: MonoBehaviour
         Camera.main.transform.position = new Vector3(20, 0, -10);
         bossGreed.transform.position = new Vector3(20, 0, 0);
         transportText.text = "Press F to Enter the Voting Hall";
+        if (hasEnteredCourthouse)
+        {
+            FindObjectOfType<NaturalizationController>().SpawnKey(3);
+        }
     }
 
     public void GoToVotingHall()
@@ -186,11 +199,12 @@ public class GameManager: MonoBehaviour
         {
             GameOver();
         }
+        AudioSource.PlayClipAtPoint(potatoWentHome, Camera.main.transform.position);
     }
 
     public void GameOver()
     {
-        Debug.Log("Game Over");
+        AudioSource.PlayClipAtPoint(gameOverSound, Camera.main.transform.position);
         var ballotBoxes = GameObject.FindObjectsOfType<BallotBoxController>();
         foreach (var ballotBox in ballotBoxes)
         {
@@ -207,6 +221,7 @@ public class GameManager: MonoBehaviour
         UpdatePotatoesVotingText();
         potatoesInHand++;
         UpdatePotatoesInHandText();
+        AudioSource.PlayClipAtPoint(potatoInHand, Camera.main.transform.position);
     }
     
     public void PotatoNaturalized()
@@ -222,10 +237,24 @@ public class GameManager: MonoBehaviour
         potatoesVoting++;
         UpdatePotatoesVotingText();
         totalVoted++;
-        if (totalVoted > 10)
+        if (totalVoted > 4 && !hasEnteredCourthouse)
         {
             introBarnard = true;
             chatPanel.SetActive(true);
+        }
+
+        var random = Random.Range(0, 3);
+        switch (random)
+        {
+            case 0:
+                AudioSource.PlayClipAtPoint(potatoThrown1, Camera.main.transform.position);
+                break;
+            case 1:
+                AudioSource.PlayClipAtPoint(potatoThrown2, Camera.main.transform.position);
+                break;
+            case 2:
+                AudioSource.PlayClipAtPoint(potatoThrown3, Camera.main.transform.position);
+                break;
         }
     }
 

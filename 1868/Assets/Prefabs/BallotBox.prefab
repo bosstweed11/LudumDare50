@@ -284,6 +284,7 @@ MonoBehaviour:
   republicanVoteUI: {fileID: 5334367285969394443}
   democraticVoteCount: 0
   republicanVoteCount: 0
+  potatoToVote: {fileID: 8300000, guid: b99e66858a7df43b792b91dc5ef916e9, type: 3}
 --- !u!1 &5334367286667230885
 GameObject:
   m_ObjectHideFlags: 0

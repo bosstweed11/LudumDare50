@@ -136,3 +136,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _potatoState: 0
   _gameManager: {fileID: 0}
+  sprite1: {fileID: 21300000, guid: 748dca8c0509a4155ae6e6ea497decaa, type: 3}
+  sprite2: {fileID: 21300000, guid: ff0e8df585b5c4c39b05439afb96cb5e, type: 3}
+  sprite3: {fileID: 21300000, guid: f8949ad556e1e472d9b89e01361846c1, type: 3}

@@ -99,5 +99,6 @@ MonoBehaviour:
   SKey: {fileID: 21300000, guid: 242c2eeab48f8490cb7e18836d386375, type: 3}
   DKey: {fileID: 21300000, guid: bd2dbc6894f644d63a89776cc142aaf4, type: 3}
   tater: {fileID: 7380860875284785172, guid: 9278cf52ee5ca4bb6abb0caf0b01e776, type: 3}
-  moveSpeed: 0.03
+  missedKeyPress: {fileID: 8300000, guid: fb98760a4247749ef9f161e0efb033d4, type: 3}
+  madeKeyPress: {fileID: 8300000, guid: b99e66858a7df43b792b91dc5ef916e9, type: 3}
   key: -1

@@ -10,14 +10,19 @@ public class KeyController : MonoBehaviour
     [SerializeField] private Sprite SKey;
     [SerializeField] private Sprite DKey;
     [SerializeField] private GameObject tater;
+
+    [SerializeField] private AudioClip missedKeyPress;
+    [SerializeField] private AudioClip madeKeyPress;
+
+    private PlayerMovement player;
     // Start is called before the first frame update
-    public float moveSpeed = 0.03f;
     public int key = -1;
 
     public List<KeyControl> keys;
     
     void Start()
     {
+        player = FindObjectOfType<PlayerMovement>();
         keys = new List<KeyControl>
         {
             Keyboard.current.aKey,
@@ -25,7 +30,6 @@ public class KeyController : MonoBehaviour
             Keyboard.current.dKey,
         };
         key = Random.Range(0, 3);
-        Debug.Log("Key is : " + key);
         switch (key)
         {
             case 0:
@@ -47,48 +51,56 @@ public class KeyController : MonoBehaviour
     void Update()
     {
         transform.position += Vector3.left * FindObjectOfType<NaturalizationController>().moveSpeed;
-        if (keys[key].wasPressedThisFrame)
+        if (player.transform.position.x > 10)
         {
-            if (transform.position.x > 18.5 && transform.position.x < 21.5)
+            if (keys[key].wasPressedThisFrame)
             {
-                Success();
+                if (transform.position.x > 18.5 && transform.position.x < 21.5)
+                {
+                    Success();
+                }
+                else if (transform.position.x > 21.5)
+                {           
+                    Failure();
+                }
+                else if (transform.position.x < 18.5)
+                {
+                    Failure();
+                }
             }
-            else if (transform.position.x > 21.5)
-            {           
-                FindObjectOfType<NaturalizationController>().SpawnKey();
-                Destroy(gameObject);
-                Debug.Log("too early!");
-            }
-            else if (transform.position.x < 18.5)
+            else if (Keyboard.current.anyKey.wasPressedThisFrame)
             {
-                FindObjectOfType<NaturalizationController>().SpawnKey();
-                Destroy(gameObject);
-                Debug.Log("too late!");
+                Failure();
             }
         }
-        else if (Keyboard.current.anyKey.wasPressedThisFrame)
+        
+        if (transform.position.x < 10.5)
         {
-            Debug.Log("wrong key");
-            FindObjectOfType<NaturalizationController>().SpawnKey();
-
-            Destroy(gameObject);
+            Failure();
         }
-        else if (transform.position.x < 10.5)
+    }
+
+    void Failure()
+    {
+        if (player.transform.position.x > 10)
         {
-            Debug.Log("way too late");
-            FindObjectOfType<NaturalizationController>().SpawnKey();
-
-            Destroy(gameObject);
+            AudioSource.PlayClipAtPoint(missedKeyPress, Camera.main.transform.position);
+            FindObjectOfType<NaturalizationController>().SpawnKey(1);
         }
+        Destroy(gameObject);
     }
     
     void Success(){
-        Debug.Log("Success");
         Instantiate(tater, transform.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(madeKeyPress, Camera.main.transform.position);
         FindObjectOfType<GameManager>().PotatoNaturalized();
         
-        FindObjectOfType<NaturalizationController>().moveSpeed *= 2;
-        FindObjectOfType<NaturalizationController>().SpawnKey();
+        FindObjectOfType<NaturalizationController>().moveSpeed += .02f;
+        if (FindObjectOfType<NaturalizationController>().moveSpeed > .15)
+        {
+            FindObjectOfType<NaturalizationController>().moveSpeed = .15f;
+        }
+        FindObjectOfType<NaturalizationController>().SpawnKey(2);
         Destroy(gameObject);
     }
 }
