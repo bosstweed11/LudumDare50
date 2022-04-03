@@ -67,74 +67,38 @@ public class ResultsController : MonoBehaviour
 
     private void CalculateResultText()
     {
+        int democraticRacesWon = 0;
+        if (democratMayorVotes > republicanMayorVotes)
+            democraticRacesWon++;
         
-        if ((republicanMayorVotes < 100 && democratMayorVotes < 100) ||
-            (republicanComptrollerVotes < 100 && democratComptrollerVotes < 100) ||
-            (republicanPublicWorksVotes < 100 && democratPublicWorksVotes < 100) ||
-            (republicanCityChamberlainVotes < 100 && democratCityChamberlainVotes < 100))
-        {
-            resultTextUI.text = "Oh no! All your voters left you and went home. Try Again!";
-        }
-        else
-        {
-            int republicanRacesWon = 0;
-            int democraticRacesWon = 0;
-            if (republicanMayorVotes > 100 && republicanMayorVotes > democratMayorVotes)
-            {
-                republicanRacesWon++;
-            }
-            else
-            {
-                democraticRacesWon++;
-            }
-            
-            if (republicanComptrollerVotes > 100 && republicanComptrollerVotes > democratComptrollerVotes)
-            {
-                republicanRacesWon++;
-            }
-            else
-            {
-                democraticRacesWon++;
-            }
-            
-            if (republicanPublicWorksVotes > 100 && republicanPublicWorksVotes > democratPublicWorksVotes)
-            {
-                republicanRacesWon++;
-            }
-            else
-            {
-                democraticRacesWon++;
-            }
-            
-            if (republicanCityChamberlainVotes > 100 && republicanCityChamberlainVotes > democratCityChamberlainVotes)
-            {
-                republicanRacesWon++;
-            }
-            else
-            {
-                democraticRacesWon++;
-            }
+        if (democratComptrollerVotes > republicanComptrollerVotes)
+            democraticRacesWon++;
 
-            if (democraticRacesWon == 0)
-            {
-                resultTextUI.text = "Oh no! All the elections got away from you this time. Try Again!";
-            }
-            else if (democraticRacesWon == 1)
-            {
-                resultTextUI.text = "You won 1 election, Try to win them all next time!";
-            }
-            else if (democraticRacesWon == 2)
-            {
-                resultTextUI.text = "2 out of 4 ain't bad, but it ain't control! Try Again!";
-            }
-            else if (democraticRacesWon == 3)
-            {
-                resultTextUI.text = "So close! You won 3 out of 4! Try to get them all next time!";
-            }
-            else if (democraticRacesWon == 4)
-            {
-                resultTextUI.text = "Congratulations! You control the government! Now be nice!";
-            }
+        if (democratPublicWorksVotes > republicanPublicWorksVotes)
+            democraticRacesWon++;
+
+        if (democratCityChamberlainVotes > republicanCityChamberlainVotes)
+            democraticRacesWon++;
+
+        if (democraticRacesWon == 0)
+        {
+            resultTextUI.text = "Oh no! All the elections got away from you this time. Try Again!";
+        }
+        else if (democraticRacesWon == 1)
+        {
+            resultTextUI.text = "You won 1 election, Try to win them all next time!";
+        }
+        else if (democraticRacesWon == 2)
+        {
+            resultTextUI.text = "2 out of 4 ain't bad, but it ain't control! Try Again!";
+        }
+        else if (democraticRacesWon == 3)
+        {
+            resultTextUI.text = "So close! You won 3 out of 4! Try to get them all next time!";
+        }
+        else if (democraticRacesWon == 4)
+        {
+            resultTextUI.text = "Congratulations! You control the government! Now be nice!";
         }
     }
 }

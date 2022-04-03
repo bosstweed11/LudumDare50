@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,13 +9,15 @@ public class GameManager: MonoBehaviour
     [SerializeField] private TextMeshProUGUI potatoesInHandUI;
     [SerializeField] private TextMeshProUGUI potatoesVotingUI;
     [SerializeField] private TextMeshProUGUI potatoesAtHomeUI;
-
+    [SerializeField] private TextMeshProUGUI timeLeftUI;
+    
     [SerializeField] private GameObject chatPanel;
     [SerializeField] private TextMeshProUGUI chatText;
 
     private int potatoesAtHome = 0;
     private int potatoesInHand = 5;
     private int potatoesVoting = 0;
+    private float gameTimeLeft = 60 * 3;
 
     private List<string> introChatMessages = new List<string>
     {
@@ -32,7 +32,7 @@ public class GameManager: MonoBehaviour
         "Let the voting begin!\n\nPolls are open!",
     };
 
-    private bool readingIntro = true;
+    private bool reading = true;
     private int introTextIndex = 0;
     
     
@@ -45,16 +45,21 @@ public class GameManager: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (readingIntro)
+        if (reading)
         {
             if (Keyboard.current.anyKey.wasPressedThisFrame)
             {
                 introTextIndex++;
                 if (introTextIndex == introChatMessages.Count)
                 {
-                    readingIntro = false;
+                    reading = false;
                     chatPanel.SetActive(false);
                     FindObjectOfType<PlayerMovement>().canMove = true;
+                    var ballotBoxes = FindObjectsOfType<BallotBoxController>();
+                    foreach (var ballotBox in ballotBoxes)
+                    {
+                        ballotBox.Open();
+                    }
                 }
                 else
                 {
@@ -62,27 +67,27 @@ public class GameManager: MonoBehaviour
                 }
             }
         }
+        else
+        {
+            gameTimeLeft -= Time.deltaTime;
+            if (gameTimeLeft > 10)
+            {
+                timeLeftUI.text = "Polls Close in: " + (int)(gameTimeLeft / 60) + ":" + (int)(gameTimeLeft % 60);
+            }
+            else
+            {
+                timeLeftUI.text = "Polls Close in: 0:0" + (int)(gameTimeLeft % 60);
+            }
+            if (gameTimeLeft < 0)
+            {
+                GameOver();
+            }
+        }
     }
 
     void SetIntroText()
     {
         chatText.text = introChatMessages[introTextIndex];
-    }
-    
-    public void UpdatePotatoText(PotatoState state, int count)
-    {
-        switch (state)
-        {
-            case PotatoState.InHand:
-                potatoesInHandUI.text = "In Hand: " + count;
-                break;
-            case PotatoState.InAir:
-            case PotatoState.Returning:
-                potatoesInHandUI.text = "Voting: " + count;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(state), state, null);
-        }
     }
 
     public void PotatoWentHome()
@@ -94,16 +99,21 @@ public class GameManager: MonoBehaviour
 
         if (potatoesVoting == 0 && potatoesInHand == 0)
         {
-            Debug.Log("Game Over");
-            var ballotBoxes = GameObject.FindObjectsOfType<BallotBoxController>();
-            foreach (var ballotBox in ballotBoxes)
-            {
-                PlayerPrefs.SetInt(ballotBox.label + "Democrat", ballotBox.democraticVoteCount);
-                PlayerPrefs.SetInt(ballotBox.label + "Republican", ballotBox.republicanVoteCount);
-            }
-
-            SceneManager.LoadScene("Ending");
+            GameOver();
         }
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over");
+        var ballotBoxes = GameObject.FindObjectsOfType<BallotBoxController>();
+        foreach (var ballotBox in ballotBoxes)
+        {
+            PlayerPrefs.SetInt(ballotBox.label + "Democrat", ballotBox.democraticVoteCount);
+            PlayerPrefs.SetInt(ballotBox.label + "Republican", ballotBox.republicanVoteCount);
+        }
+
+        SceneManager.LoadScene("Ending");
     }
 
     public void PotatoInHand()

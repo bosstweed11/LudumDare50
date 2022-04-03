@@ -11,21 +11,31 @@ public class BallotBoxController : MonoBehaviour
     public int republicanVoteCount = 0;
     private float counter = 0;
     private GameManager _gameManager;
+
+    private bool isOpen = false;
     
     void Start()
     {
         _gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
+    public void Open()
+    {
+        isOpen = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        counter += Time.deltaTime;
-        if (counter > 1)
+        if (isOpen)
         {
-            republicanVoteCount++;
-            UpdateRepublicanText();
-            counter = 0;
+            counter += Time.deltaTime;
+            if (counter > 1)
+            {
+                republicanVoteCount++;
+                UpdateRepublicanText();
+                counter = 0;
+            }
         }
     }
 
@@ -46,7 +56,6 @@ public class BallotBoxController : MonoBehaviour
     private void UpdateRepublicanText()
     {
         //Debug.Log("Voted Republican!");
-        republicanVoteCount++;
         republicanVoteUI.text = republicanVoteCount.ToString();
     }
     
