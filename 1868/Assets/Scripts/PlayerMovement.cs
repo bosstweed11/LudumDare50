@@ -31,8 +31,18 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canMove)
+        if (canMove && transform.position.x < 20)
+        {
             Walk();
+        }
+
+        if (transform.position.x > 10)
+        {
+            if (Keyboard.current.fKey.wasPressedThisFrame)
+            {
+                _gameManager.GoToVotingHall();
+            }
+        }
     }
 
     void Walk()
@@ -65,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnFire()
     {
-        if (canMove)
+        if (canMove && transform.position.x < 20)
         {
             var getNextPotatoToThrow = GetNextPotato();
             if (getNextPotatoToThrow != null)
