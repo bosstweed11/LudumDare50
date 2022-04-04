@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -57,13 +58,28 @@ public class GameManager: MonoBehaviour
         "When you're elected and in power, I want a seat in the New York State Supreme Court",
         "Done! I'll need you there anyway to grow influence outside of the city.",
         "Great, well more voters is easy, they just need documents, you can fill them out here.",
-        "Just press the buttons in the order they appear on the screen, remember it's just a game!",
-        "Right I almost forgot! Let's get to work!",
+        "Just press the buttons that show up when they are in front of me",
+        "When you do that, the buttons turn into potatoes! Aren't games awesome?!",
+        "They are! Let's get to work!",
     };
 
     private List<int> greedPicturesJudgeText = new List<int>
     {
-        0, 1, 3, 5, 8
+        0, 1, 3, 5, 9
+    };
+    
+    private List<List<int>> refreshRates = new List<List<int>>
+    {
+        new List<int> {1, 4, 10, 20},
+        new List<int> {4, 10, 20, 1},
+        new List<int> {10, 20,4 ,1},
+        new List<int> {20, 4, 1, 10},
+        new List<int> {1, 20, 10 , 4},
+        new List<int> {4 ,20, 10, 1},
+        new List<int> {10, 1, 20, 4},
+        new List<int> {20, 4, 1, 10},
+        new List<int> {20, 10, 1, 4},
+        new List<int> {10, 1, 4, 20},
     };
 
     private int judgeTextIndex = 0;
@@ -74,6 +90,7 @@ public class GameManager: MonoBehaviour
     private int totalVoted = 0;
     private bool introBarnard = false;
     private bool hasEnteredCourthouse = false;
+    private int shuffleTime = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -95,10 +112,13 @@ public class GameManager: MonoBehaviour
                     reading = false;
                     chatPanel.SetActive(false);
                     FindObjectOfType<PlayerMovement>().canMove = true;
+                    var random = Random.Range(0, 10);
                     var ballotBoxes = FindObjectsOfType<BallotBoxController>();
-                    foreach (var ballotBox in ballotBoxes)
+                    var currentRange = refreshRates[random];
+                    for (var i = 0; i < ballotBoxes.Length; i++)
                     {
-                        ballotBox.Open();
+                        ballotBoxes[i].Open();
+                        ballotBoxes[i].voteCounter = currentRange[i];
                     }
                 }
                 else
@@ -161,6 +181,29 @@ public class GameManager: MonoBehaviour
                     }
                 }
             }
+
+            if (gameTimeLeft < 120 && shuffleTime == 0)
+            {
+                ShuffleRates();
+                shuffleTime++;
+            }
+
+            if (gameTimeLeft < 60 && shuffleTime == 1)
+            {
+                ShuffleRates();
+                shuffleTime++;
+            }
+        }
+    }
+
+    void ShuffleRates()
+    {
+        var random = Random.Range(0, 10);
+        var ballotBoxes = FindObjectsOfType<BallotBoxController>();
+        var currentRange = refreshRates[random];
+        for (var i = 0; i < ballotBoxes.Length; i++)
+        {
+            ballotBoxes[i].voteCounter = currentRange[i];
         }
     }
 

@@ -12,7 +12,7 @@ public class PotatoMovement : MonoBehaviour
     [SerializeField] private Sprite sprite2;
     [SerializeField] private Sprite sprite3;
 
-    private float returnSpeed = 0.005f;
+    private float returnSpeed = 1f;
     private float followSpeed = 0.05f;
     // Start is called before the first frame update
     void Start()
@@ -62,16 +62,15 @@ public class PotatoMovement : MonoBehaviour
 
     public void UpdateReturn()
     {
-        var distance = Vector2.Distance(transform.position, _player.position);
-        var direction = (_player.position - transform.position).normalized;
+        var distance = Vector2.Distance(transform.position, Vector3.zero);
+        var direction = (Vector3.zero - transform.position).normalized;
 
-        transform.position += direction * returnSpeed;
+        transform.position += direction * returnSpeed * Time.deltaTime;
         if (_potatoState.Equals(PotatoState.Returning))
         {
             if (distance < 1f)
             {
                 _potatoState = PotatoState.InHand;
-                Debug.Log("In hand!");
                 _gameManager.PotatoInHand();
             }
         }
@@ -82,7 +81,6 @@ public class PotatoMovement : MonoBehaviour
         var distance = Vector2.Distance(transform.position, _player.position);
         if (distance > 20f)
         {
-            Debug.Log("Went home!");
             _gameManager.PotatoWentHome();
             Destroy(gameObject);
         }
@@ -90,7 +88,6 @@ public class PotatoMovement : MonoBehaviour
 
     public void Return()
     {
-        Debug.Log("Voted!");
         _potatoState = PotatoState.Returning;
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
     }

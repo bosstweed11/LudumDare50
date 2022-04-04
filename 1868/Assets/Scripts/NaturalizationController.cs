@@ -9,7 +9,7 @@ public class NaturalizationController : MonoBehaviour
     private float spawnTimer = 2.5f;
     private float timeSinceLastSpawn = 0;
     public bool hasStarted = false;
-    public float moveSpeed = 0.03f;
+    public float moveSpeed = 0.4f;
     [SerializeField] private GameObject key;
     // Start is called before the first frame update
     void Start()

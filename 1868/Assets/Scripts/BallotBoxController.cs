@@ -9,8 +9,10 @@ public class BallotBoxController : MonoBehaviour
     // Start is called before the first frame update
     public int democraticVoteCount = 0;
     public int republicanVoteCount = 0;
-    private float counter = 0;
+    public float counter = 0;
     private GameManager _gameManager;
+
+    public float voteCounter = 0;
 
     private bool isOpen = false;
     
@@ -32,7 +34,7 @@ public class BallotBoxController : MonoBehaviour
         if (isOpen)
         {
             counter += Time.deltaTime;
-            if (counter > 3)
+            if (counter > voteCounter)
             {
                 republicanVoteCount++;
                 UpdateRepublicanText();

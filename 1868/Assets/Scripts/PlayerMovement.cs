@@ -89,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
                     y = throwVector.y * throwSpeed
                 };
                 _gameManager.SentPotatoToVote();
-                Debug.Log("Threw potato!");
             }
         }
     }
